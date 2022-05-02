@@ -1,0 +1,29 @@
+{
+  "name": "factory-sync",
+  "version": "1.0.2",
+  "description": "A tool for building react native / node projects faster",
+  "main": "do.js",
+  "scripts": {
+    "test": "node do.js test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielPCoyle/factory-sync.git"
+  },
+  "keywords": [
+    "node",
+    "react",
+    "react-native",
+    "api",
+    "sequelize"
+  ],
+  "author": "Daniel Coyle",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/DanielPCoyle/factory-sync/issues"
+  },
+  "homepage": "https://github.com/DanielPCoyle/factory-sync#readme",
+  "dependencies": {
+    "util": "^0.12.4"
+  }
+}
