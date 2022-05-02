@@ -1,6 +1,6 @@
 {
   "name": "factory-sync",
-  "version": "1.0.2",
+  "version": "1.0.11",
   "description": "A tool for building react native / node projects faster",
   "main": "do.js",
   "scripts": {

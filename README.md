@@ -29,7 +29,8 @@
 MIGRATION_DIR='api/server/migrations' 
 MODELS_DIR='api/server/models'
 SEEDERS_DIR='api/server/seeders'
-ENV_SETTINGS_DIR='src/server/env'
+ENV_SETTINGS_DIR='src/env'
+UI_DATA_DIR='src/ui_data
 ```
 \* Or define where each folder is yourself.
 
@@ -189,8 +190,92 @@ Syncing with the routes sheet will generate a file in the `UI_DATA_DIRECTORY` sp
 | Column  | Definition  |
 |---|---|
 |**platform**|Specify which platforms this route is accessable on.
-|**inNav**| Specify which platforms have this route included in the applications navigation.
+|**inNav**|Specify which platforms this route is accessable on.
 |**access**|Which user types have access to this route? seperate by commas. 
 |**name**| The name for this route that will be used in react native `navigation.navigate` function
 |**path**| the url or deep link path.
 |**component**| The screen component that will be used to render this route. 
+
+
+## App Level Components & Hooks
+### useFactoryRoutes (hook)
+
+You can use the `useFactoryRoutes` hook inside your react / react-native project to access routes and apply access and platform logic.
+
+```jsx
+...
+import useFactoryRoutes from "factory-sync/ui/helpers/useFactoryRoutes";
+...
+
+
+const Component = ()=>{
+    ...
+    // user object must have a type property.
+    const user = {
+      "type":"client"
+      }
+    const {links} = useFactoryRoutes(user); 
+    ...
+
+    return links
+    .map((link,i)=>{
+      return <Link 
+        to={link.path} 
+        key={link.name}>
+        <View>
+          <Text>{link.name}</Text>
+        </View>
+      </Link>
+    } )
+}
+
+```
+
+### FactoryWebRouterSwitch (component)
+
+Use the FactoryWebRouterSwitch component to handle routing on web in your application. 
+
+```jsx
+
+import * as Screens from "./screens";
+import FactoryWebRouterSwitch from "factory-sync/ui/components/FactoryWebRouterSwitch";
+import {
+  BrowserRouter as Router,
+} from "react-router-dom";
+
+
+const App = () => {
+  return  <div>
+  <Router>
+       <div className="pb-5 mb-5 w-100" >
+            <WebSwitch {...{Screens,isAdminArea,user}} />
+        </div>
+  </Router>
+  </div>
+}
+```
+
+
+### FactoryMetaHandler (component)
+A component that handles the meta tags (title tags, description) for your website based on the data in the routes sync.
+
+```jsx
+import useFactoryRoutes from "factory-sync/ui/helpers/useFactoryRoutes";
+import * as Screens from "./screens";
+import FactoryWebRouterSwitch from "factory-sync/ui/components/FactoryWebRouterSwitch";
+import MetaHandler from "factory-sync/ui/components/FactoryMetaHandler";
+...
+const App = () => {
+  const {links} = useFactoryRoutes(user)
+
+  return  <div>
+  <Router>
+       <div className="pb-5 mb-5 w-100" >
+            <WebSwitch {...{Screens,isAdminArea,user}} />
+            <MetaHandler routes={links}/>
+        </div>
+  </Router>
+  </div>
+}
+
+```
