@@ -20,14 +20,14 @@ export const fields =   async (auth,sheet, args)=>ListValues(auth, sheet || "fie
 
 
     const initFile = `'use strict';
-    const {initUp,initDown,initMigration} = require('../../services/migrations')
+    const {initUp,initDown,initMigration} = require('factory-sync/migrations')
     module.exports = {
       up:initUp(initMigration('${timeStamp}')),
       down:initDown(initMigration('${timeStamp}'))
     };`;
 
     const updateFile = `'use strict';
-    const {up,down} = require('../../services/migrations')
+    const {up,down} = require('factory-sync/migrations')
     module.exports = {
       up:up('${timeStamp}'),
       down:down('${timeStamp}')
