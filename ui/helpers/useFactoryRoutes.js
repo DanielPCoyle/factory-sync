@@ -6,7 +6,6 @@ const useFactoryRoutes =  (user)=>{
     React.useEffect(()=>{
         const doSetLinks = () => setLinks(navLinks
             .filter((l)=>l.platform.includes(Platform.OS !== "web" ? "mobile" : "web"))
-            .filter((l)=>l.inNav.includes(Platform.OS !== "web" ? "mobile" : "web"))
             .filter((l)=> l.access.trim().length === 0 || l.access.includes(
               Boolean(user?.type) ? user?.type : "public" 
             ))
