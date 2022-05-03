@@ -64,19 +64,9 @@ let commands = {
         description:"Runs test suite for projects interal development scripts in the /tools directory.",
         arguments:[],
     },
-    "switch": {
-        cli:"npx babel-node ./node_modules/factory-sync/switch.js",
-        description:"Executes a code switch on all files in the /src directory. Will comment and uncomment lines in code that are prceeded by '// @switch mobile' or '// @switch web' accordingly",
-        arguments:[],
-    },
     "organize":{
         cli: "npx babel-node --experimental-json-modules ./node_modules/factory-sync/organize.js",
         description:"Builds index files based on specified directories. ",
-        arguments:[],
-    },
-    "branchEnv": {
-        cli:"ts-node ./node_modules/factory-sync/branchEnv.ts",
-        description:"Changes current env and performs 'switch' based on the git branches name. For example a git branch named 'mobile-development' will switch to mobile and change the env to development.",
         arguments:[],
     },
     "ngnix-generateSiteAvailable":{ // 
