@@ -77,12 +77,18 @@ npm install factory-sync
 `
 
 ### Init
+
+
+Option 1:
 From the terminal run
 `
 yarn do sync init
 `
 
 This will add sheets (tabs) to your google spreadsheet as well as fill in any exisiting schema data found in your database. 
+
+Option 2:
+Download a copy of [this google spreadsheet.](https://docs.google.com/spreadsheets/d/1qVN5FORm9WoHp5vPpcBpwfhJcH3VnLb6D7rrCN_YYvo/edit?usp=sharing)
 
 ## Sync 
 
@@ -197,7 +203,7 @@ Syncing with the routes sheet will generate a file in the `UI_DATA_DIRECTORY` sp
 |**component**| The screen component that will be used to render this route. 
 
 
-## App Level Components & Hooks
+## Components & Hooks
 ### useFactoryRoutes (hook)
 
 You can use the `useFactoryRoutes` hook inside your react / react-native project to access routes and apply access and platform logic.
@@ -279,3 +285,6 @@ const App = () => {
 }
 
 ```
+
+### useWebDeepLinks (hook)
+### useMobileDeepLinks (hook)
