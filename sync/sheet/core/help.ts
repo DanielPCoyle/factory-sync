@@ -11,7 +11,7 @@ export const help = (funcs) => {
       console.log("\t- ",func,":")
 
       if(func === "settings"){
-        console.log("\t\t","Parses the \x1b[36msettings\x1b[0m sheet and generates the files in the env src/env directory.")
+        console.log("\t\t","Parses the \x1b[36msettings\x1b[0m sheet and generates the files in the env src/ui_data/env directory.")
         console.log("\t\t","The first column in the sheet is the key, the following columns are the values ")
         console.log("\t\t","for the corespoding key for each env (column header).");
       }

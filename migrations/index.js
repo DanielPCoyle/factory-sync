@@ -12,7 +12,7 @@ if (fs.existsSync('.env.'+process.env.NODE_ENV)) {
     config()
 }
 
-const migrationPath = path.resolve(process.env.MIGRATION_DIR);
+const migrationPath = path.resolve(process.env.MIGRATION_DIR ?? "./api/server/migrations");
 
 const initMigration = (timeStamp) => {
    const fields  = require(migrationPath+`/${timeStamp}-fields`);

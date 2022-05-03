@@ -14,8 +14,8 @@ if (fs.existsSync('.env.'+process.env.NODE_ENV)) {
 const readdir = util.promisify(fs.readdir);
 const readFile = util.promisify(fs.readFile);
 const ex = util.promisify(exec);
-const uiDataDir = process.env.UI_DATA_DIR || 'src/__core/env';
-const envDir = uiDataDir+"/" || 'src/__core/env';
+const uiDataDir = process.env.UI_DATA_DIR || 'src/ui_data/env';
+const envDir = uiDataDir+"/" || 'src/ui_data/env';
 
 
 const doCall = async (call) => await ex(call);

@@ -1,6 +1,9 @@
-# Factory-Sync
+### WORK IN PROGRESS
+I have recently decided to break this tool out of a project I am working on.
+I am in the process of documenting and testing outside the project's current development enviornments.
 
-- A tool for building projects faster.
+# Factory-Sync
+- A collection of tool, components, and hooks for building proejcts faster.
 
 ## Getting Started
 
@@ -262,6 +265,7 @@ const App = () => {
 ```
 
 
+
 ### FactoryMetaHandler (component)
 A component that handles the meta tags (title tags, description) for your website based on the data in the routes sync.
 
@@ -288,6 +292,9 @@ const App = () => {
 
 ### useWebDeepLinks (hook)
 ### useMobileDeepLinks (hook)
+### useApi (hook)
+### ider (util)
+
 ## Automated Deployment
 Trigger automated deployments via git hub webhooks. 
 
@@ -311,6 +318,8 @@ include one of the following tags in the git commit you are pushing.
 | tag  | action  |
 |---|---|
 |   ::deploy:: |Drops DB, Creates DB, migrates from scratch and seeds data...
-|   ::migrate:: |
-|   ::seed:: |
+|   ::migrate:: | Runs migration on Database
+|   ::seed:: | Adds seed data to database
+|   ::build:: | Create a new build and replaces existing web folder with new build.
+
 

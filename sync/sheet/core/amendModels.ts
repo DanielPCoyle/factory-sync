@@ -30,10 +30,10 @@ const maker = (type,field,func)=>{
 }
 
 export default async()=>{
-    const files:string[] = await readdir(process?.env?.MODELS_DIR)
-    const migrationDir = await readdir(process?.env?.MIGRATION_DIR)
+    const files:string[] = await readdir(path.resolve(process?.env?.MODELS_DIR ?? "./api/server/models"))
+    const migrationDir = await readdir(path.resolve(process?.env?.MIGRATION_DIR ?? "./api/server/migrations"))
     const migrationFile = migrationDir.filter(f=>f.includes(".json"))[migrationDir.filter(f=>f.includes(".json")).length-1]
-    const fieldMetaRaw = await readFile(process.env.MIGRATION_DIR+"/"+migrationFile, "binary")
+    const fieldMetaRaw = await readFile(path.resolve(process?.env?.MIGRATION_DIR ?? "./api/server/migrations" ) +"/"+migrationFile, "binary")
     files.filter(f=>!["model-meta.json","index.ts","index.js","init-models.ts","getters","setters","sync_meta.js","SequelizeMeta.js","init-models.js"].includes(f)).forEach(async file=>{
         const fieldMeta = JSON.parse(fieldMetaRaw)
     .filter(f=>f.table === file.replace(".js",""))
@@ -44,7 +44,7 @@ export default async()=>{
         const getterImports:string[] = [];
         const setterImports:string[] = [];
 
-        const filePath = process.env.MODELS_DIR+"/"+file;
+        const filePath = path.resolve(process.env.MODELS_DIR ?? "./api/server/models")+"/"+file;
         let contents = await readFile(filePath, "binary")
         const replace = `return sequelize.define('${file.replace(".js","")}',`
         contents = contents.replace(replace,"const args = [")

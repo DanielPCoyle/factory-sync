@@ -3,7 +3,7 @@ import path from 'path';
 import {ListValues} from "./util"
 
 export const settings =  async (auth,sheet,args)=>ListValues(auth, sheet || "settings",(data)=>{
-      const envDir = 'src/__core/env';
+      const envDir = 'src/ui_data/env';
       const envs = {};
       data.forEach((row)=>{
         const key = row.key

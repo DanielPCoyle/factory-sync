@@ -10,7 +10,7 @@ if (fs.existsSync('.env.'+process.env.NODE_ENV)) {
     config()
 }
 
-const path1 = path.resolve(process.env.MODELS_DIR);
+const path1 = path.resolve(process.env.MODELS_DIR ?? "./api/server/models");
 
 const fire = async () =>{
 const files = await readdir(path1)
