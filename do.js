@@ -1,7 +1,6 @@
 const path = require("path");
 const child_process = require('child_process');
 const args = process.argv.splice(2);
-
 const settings = require(path.resolve("./config/config.json"))
 const command = args[0];
 const env = process.env.NODE_ENV ?? "local"
@@ -69,9 +68,9 @@ let commands = {
         description:"Builds index files based on specified directories. ",
         arguments:[],
     },
-    "ngnix-generateSiteAvailable":{ // 
-        cli: "ts-node ./node_modules/factory-sync/ngnix/generateSiteAvailable.js",
-        description:"Creates site available file for ngnix. MUST BE RAN WITH SUDO AND HAVE NGNIX INSTALLED ON SERVER.",
+    "nginx-generateSiteAvailable":{ // 
+        cli: "ts-node ./node_modules/factory-sync/nginx/generateSiteAvailable.js",
+        description:"Creates site available file for nginx. MUST BE RAN WITH SUDO AND HAVE nginx INSTALLED ON SERVER.",
         arguments:[],
     },
 }
@@ -112,6 +111,7 @@ if(command === "help"){
         console.log("\n________________________\n")
     })
     console.log("\n\n\n")
+    return true;
 }
 
 const fire = commands[command].cli+" "+remainingArgs

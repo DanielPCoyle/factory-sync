@@ -10,10 +10,16 @@ const obj = {}
 keys.forEach((key,i)=>obj[key.replace("--","")] = values[i] )
 
 var uid = parseInt(process.env.SUDO_UID);
-if(!Boolean(uid)){
+if(!Boolean(uid) && obj.write.toLowerCase() === "true"){
     console.log("MUST RUN AS SUDO (DONT RUN AS ROOT DUMMY)")
     return;
 }
+
+if(obj.write.toLowerCase() !== "true"){
+    createSiteAvailable(obj)
+    return;
+}
+
 if(!fs.existsSync('/etc/nginx/sites-available')) {
     console.log("NO nginx")
     return;

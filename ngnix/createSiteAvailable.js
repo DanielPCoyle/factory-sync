@@ -1,5 +1,5 @@
 const fs = require('fs');
-const createSiteAvailable = ({ domain, deploymentPort, rootDir, host }) => {
+const createSiteAvailable = ({ domain, deploymentPort, rootDir, host, write }) => {
 
     if (!domain) {
         return "NEED DOAMIN";
@@ -21,19 +21,6 @@ const createSiteAvailable = ({ domain, deploymentPort, rootDir, host }) => {
             location /deployment {
                     proxy_pass  ${host ?? 'http://127.0.0.1'}:${deploymentPort ?? 5002};
             }
-            ${""
-            /*
-                +
-                `
-                listen [::]:443 ssl; # managed by Certbot
-                listen 443 ssl; # managed by Certbot
-                ssl_certificate /etc/letsencrypt/live/${domain}/fullchain.pem; # managed by Certbot
-                ssl_certificate_key /etc/letsencrypt/live/${domain}/privkey.pem; # managed by Certbot
-                include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
-                ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-                `
-            */
-            }
     }
     server {
         if ($host = ${domain}) {
@@ -47,6 +34,9 @@ const createSiteAvailable = ({ domain, deploymentPort, rootDir, host }) => {
     }
     `;
 
+    if(write !== "true"){
+        console.log(content)
+    }
     fs.writeFile("/etc/nginx/sites-available/"+domain,content, err => {
         if(err){
             console.log(err)

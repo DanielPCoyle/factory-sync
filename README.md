@@ -288,3 +288,29 @@ const App = () => {
 
 ### useWebDeepLinks (hook)
 ### useMobileDeepLinks (hook)
+## Automated Deployment
+Trigger automated deployments via git hub webhooks. 
+
+### Set Up
+To use the automated deployment on your server,
+- \*If you are using nginx on your server you can use the following command to generate the `sites-available` file needed.  
+`yarn do nginx-generateSiteAvailable --domain your-domain-here.com`
+
+- Set up a web hook on github and point it at a designated URL
+  - If you used the nginx command above it would be: [your-domain-here.com/deployment](your-domain-here.com/deployment)
+
+- add `"deployer": "ts-node ./node_modules/factory-sync/deployment.ts"` to the scripts block of your `package.json` file.
+
+- Use [pm2](https://pm2.keymetrics.io/) to run the deployment process in the background.
+
+  `pm2 start 'yarn deployer' --name 'deployer'`
+
+  
+### Git Commit triggers deployment actions.
+include one of the following tags in the git commit you are pushing.
+| tag  | action  |
+|---|---|
+|   ::deploy:: |Drops DB, Creates DB, migrates from scratch and seeds data...
+|   ::migrate:: |
+|   ::seed:: |
+
