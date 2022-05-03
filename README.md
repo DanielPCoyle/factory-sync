@@ -1,41 +1,12 @@
-### WORK IN PROGRESS
-I have recently decided to break this tool out of a project I am working on.
-I am in the process of documenting and testing outside the project's current development enviornments.
+Create react native app with factory-sync installed and configured (mostly):
+https://github.com/DanielPCoyle/factory-Sync-Project
+\* Use this if this is your first time. 
 
 # Factory-Sync
 - A collection of tool, components, and hooks for building proejcts faster.
 
 ## Getting Started
 
-### Requirements
-- Sequelize installed in your project.
-- `/config/config.json` file with sequelize database parameters for each enviornment.
-```
-{
-  "local": {
-    "username": "root",
-    "password": null,
-    "database": "dogwalk",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "logging":false,
-    "timezone":"-05:00"
-  },
-  "development": {},
-  "test": {},
-  "production": {},
-}
-```
-- the following directories need to  specified in your .env file as well as exists in your project.  
-
-```
-MIGRATION_DIR='api/server/migrations' 
-MODELS_DIR='api/server/models'
-SEEDERS_DIR='api/server/seeders'
-ENV_SETTINGS_DIR='src/env'
-UI_DATA_DIR='src/ui_data
-```
-\* Or define where each folder is yourself.
 
 ### Install
 `
@@ -46,12 +17,22 @@ or
 npm install factory-sync
 `
 
+
 ### Registering "do" script in package.json
 - In your project's package.json file under "scripts" add 
 `
 "do": "ts-node ./node_modules/factory-sync/do.js",
 `
 - * Or whatever name you want to run the script as. 
+
+
+### Set up project directories
+run the following command:
+
+```
+ts-node ./node_modules/factory-sync/setup.ts
+```
+
 
 ### Google Credential File (Required)
 - Go to https://console.cloud.google.com/apis/credentials
