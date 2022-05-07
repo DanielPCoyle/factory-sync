@@ -43,9 +43,8 @@ function useWindowSize() {
 
 export const useStyles =  (coreData) =>{
     const {env} = coreData;
-    console.log(">>>>CORE:::",JSON.stringify(env,null,2),"<<<<")
     const envColors = {};
-    Object.keys(env).filter((k)=>k.includes("color_")).forEach((k)=>{
+    Boolean(env) && Object.keys(env).filter((k)=>k.includes("color_")).forEach((k)=>{
         envColors[k.replace("color_","")] = env[k]
     })
 

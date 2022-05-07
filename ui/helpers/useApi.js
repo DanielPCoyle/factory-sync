@@ -2,7 +2,7 @@ import React from "react";
 import axios from "axios";
 
 export default (Context) => {
-    const {auth,env} = React.useContext(Context) 
+    const {auth,env,envName} = React.useContext(Context) 
     const config =  {
         headers: {
             "Access-Control-Allow-Origin": "*",
@@ -13,11 +13,13 @@ export default (Context) => {
     const apiUrl = env?.api_url;
     const get = (resource,query) => {
         const url = apiUrl+"/"+resource
+        envName !== "production" && console.log(url)
         return axios.get(url,config)
     }
 
     const post =  (resource,data,requestType = null) => { 
         const url = apiUrl+"/"+resource;
+        envName !== "production" && console.log(url)
         if(requestType === "form"){
             config.headers["Content-Type"] = 'multipart/form-data'
             config.headers["X-Requested-With"] = 'XMLHttpRequest'
@@ -27,6 +29,7 @@ export default (Context) => {
 
     const put =  (resource,data,requestType = null) => { 
         const url = apiUrl+"/"+resource;
+        envName !== "production" && console.log(url)
         
         if(requestType === "form"){
             config.headers["Content-Type"] = 'multipart/form-data'
@@ -37,6 +40,7 @@ export default (Context) => {
 
     const destroy =  (resource,query) => { 
         const url = apiUrl+"/"+resource;
+        envName !== "production" && console.log(url)
         return axios.delete(url,config)
     }
 

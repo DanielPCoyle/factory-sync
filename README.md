@@ -1,7 +1,3 @@
-Create react native app with factory-sync installed and configured (mostly):
-https://github.com/DanielPCoyle/factory-Sync-Project
-\* Use this if this is your first time. 
-
 # Factory-Sync
 - A collection of tool, components, and hooks for building proejcts faster.
 
@@ -27,10 +23,24 @@ npm install factory-sync
 
 
 ### Set up project directories
-run the following command:
+run the following command to automatically add the needed directories to your project.
 
 ```
 ts-node ./node_modules/factory-sync/setup.ts
+```
+
+this will add the following directories and files if these files do not already exisits.:
+```
+./api/server
+./api/server/migrations
+./api/server/models
+./api/server/seeders
+./src
+./src/ui_data
+./src/ui_data/env
+./config
+./config/config.json
+./.env
 ```
 
 
@@ -98,18 +108,19 @@ This command will generate a pair of files in your project's `migrations` direct
 | **table** | the name of the database table a field belongs to |REQUIRED  |
 | **field** | the name of the field, no spaces | REQUIRED |
 | **comment** | A comment that will be added to mysql  |
-| **type** | the data type for this field | REQUIRED |
+| **type** | the data type for this field | REQUIRED | [see data types](#)
 | **allowNull** | Is this field nullable? |  | TRUE, FALSE |
 | **defaultValue** | the default value in mysql for a field  |
 | **primary** | is this field the primary key |  | TRUE, FALSE |
 | **enum** | comma seperated options if data type is enum |
 | **autoIncrement** | Does this field auto increment |  | TRUE, FALSE |
-| **unique** | should the values for this field be unique?    |
-| **references** |  make associations to other tables. See references for more.   |
-| **searchable** |  is this field used to find a record in a search?  | |  | TRUE, FALSE |
-| **input_type** | the form input type  |
+| **unique** | should the values for this field be unique?    ||TRUE,FALSE
+| **references** |  make associations to other tables. See references for more.   ||[see how references work](#)
+| **searchable** |  is this field used to find a record in a search?  | |  TRUE, FALSE |
+| **input_type** | the form input type  ||[see input types](#Gettings-Started)
 | **write_transformer** | |
 
+####References
 
 ### Sync seeds 
 `yarn do sync seeds`
@@ -188,6 +199,21 @@ Syncing with the routes sheet will generate a file in the `UI_DATA_DIRECTORY` sp
 
 
 ## Components & Hooks
+
+### useCoreContext (hook)
+
+
+```jsx
+import CoreContext, { useCoreContext } from "factory-sync/ui/helpers/useCoreContext";
+...
+export const App = () => {
+  const core =  useCoreContext(()=>{
+     return {"Spidey":"Man"}
+   })
+}
+```
+
+
 ### useFactoryRoutes (hook)
 
 You can use the `useFactoryRoutes` hook inside your react / react-native project to access routes and apply access and platform logic.
@@ -272,8 +298,43 @@ const App = () => {
 ```
 
 ### useWebDeepLinks (hook)
-### useMobileDeepLinks (hook)
+```jsx
+import useWebDeepLinks from "factory-sync/ui/helpers/useWebDeepLinks";
+...
+  useWebDeepLinks();
+```
+### MobileDeepLinks (component)
+```jsx
+import MobileDeepLinks from "factory-sync/ui/components/MobileDeepLinks";
+
+...
+    <DeepLinking navigation={navigation} />
+
+```
 ### useApi (hook)
+```jsx
+import SiteContext from "@core/context";
+import useApi from "factory-sync/ui/helpers/useApi";
+...
+export default ()=>{
+  const {get} = useApi(SiteContext);
+}
+```
+### useEnv (hook)
+```jsx
+import useEnv from "factory-sync/ui/helpers/useEnv";
+...
+export default ()=>{
+        const {env,envName} = useEnv();
+...
+}
+
+```
+### useStyles (hook)
+```jsx
+
+```
+
 ### ider (util)
 
 ## Automated Deployment
@@ -295,7 +356,7 @@ To use the automated deployment on your server,
 
   
 ### Git Commit triggers deployment actions.
-include one of the following tags in the git commit you are pushing.
+include one of the following tags in the git commit you are pushing to trigger the action on the server.
 | tag  | action  |
 |---|---|
 |   ::deploy:: |Drops DB, Creates DB, migrates from scratch and seeds data...
@@ -304,3 +365,6 @@ include one of the following tags in the git commit you are pushing.
 |   ::build:: | Create a new build and replaces existing web folder with new build.
 
 
+# Also See
+A somewhat preconfigured project with API and react-native.
+https://github.com/DanielPCoyle/factory-Sync-Project
